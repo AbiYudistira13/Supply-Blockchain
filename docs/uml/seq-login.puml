@@ -1,0 +1,13 @@
+@startuml
+actor User
+participant "Router" as R
+participant "AuthModule" as A
+database DB
+
+User -> R : POST /login
+R -> A : validate(username, password)
+A -> DB : SELECT * FROM users
+DB --> A : user data
+A --> R : valid/invalid login
+R --> User : response (success or error)
+@enduml

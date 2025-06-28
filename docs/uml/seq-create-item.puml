@@ -1,0 +1,13 @@
+@startuml
+actor User
+participant "Router" as R
+participant "ItemService" as I
+database DB
+
+User -> R : POST /items/create
+R -> I : validate and save(data)
+I -> DB : INSERT INTO items
+DB --> I : success/failure
+I --> R : result
+R --> User : response (OK / error)
+@enduml
